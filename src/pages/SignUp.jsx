@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import useShop from "../hooks/useShop";
 import Loader from "../components/Loader";
@@ -12,6 +12,14 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
 
   const { handleCreateAccount, alertas, load } = useShop();
+
+  const comprobarInfo = useCallback(() => {
+    return email === '' || password === '' || password.length <= 9 || name === '' || lastName === '' || number === ''
+  }, [email, password, name, lastName, number])
+
+  useEffect(() => {
+      comprobarInfo()
+  }, [email, password, name, lastName, number])
 
   return (
     <div className='flex justify-center py-20 fondoLogin'>
@@ -93,6 +101,8 @@ const SignUp = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
                 />
+
+                <p className="text-neutral-500 text-sm mt-1">El password debe tener 9 o más carácteres</p>
             </div>
           </div>
 
@@ -103,7 +113,8 @@ const SignUp = () => {
           <div className="flex justify-center mt-5">
             <button
               type="submit"
-              className="bg-sky-600 hover:bg-sky-700 transition-colors text-neutral-100 font-bold px-2 py-1 uppercase rounded"
+              disabled={comprobarInfo()}
+              className={`${comprobarInfo() ? 'bg-neutral-200 text-neutral-500' : 'bg-sky-600 hover:bg-sky-700 text-neutral-100'} px-2 py-1 transition-colors font-bold uppercase rounded`}
             >
               Crear Cuenta
             </button>

@@ -37,6 +37,7 @@ export default class LocationSearchInput extends React.Component {
                 className: 'location-search-input',
               })}
               className='px-2 py-1 border w-full'
+              disabled={this.props.status}
             />
             <div className="autocomplete-dropdown-container">
               {loading && <div>Loading...</div>}

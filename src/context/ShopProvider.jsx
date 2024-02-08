@@ -14,6 +14,7 @@ const ShopProvider = ({children}) => {
     const [alertas, setAlertas] = useState(null);
     const [articles, setArticles] = useState([]);
     const [orders, setOrders] = useState([]);
+    const [slider, setSlider] = useState();
 
     // Funciones de la pagina
     const [type, setType] = useState(null);
@@ -378,6 +379,8 @@ const ShopProvider = ({children}) => {
                 articles,
                 handleGetBuy,
                 orders,
+                slider, 
+                setSlider
             }}
         >
             {children}

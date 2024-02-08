@@ -2,9 +2,10 @@ import { Link } from 'react-router-dom';
 import useShop from '../hooks/useShop';
 import useAuth from '../hooks/useAuth';
 import Logo from '../../public/img/Logo.png'
+import { useState } from 'react';
 
 const Header = () => {
-  const { types } = useShop();
+  const { types, setSlider, slider } = useShop();
   const { auth, logOut } = useAuth();
 
   return (
@@ -16,7 +17,18 @@ const Header = () => {
 
         <div>
           <nav className='flex gap-2 navegacionInicio h-10 items-center'>
-            <ul className='flex items-center'>
+            <ul className='flex md:hidden items-center'>
+              <li>
+                <button
+                  onClick={() => setSlider(!slider)}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                  </svg>
+                </button>
+              </li>
+            </ul>
+            <ul className='hidden md:flex items-center'>
               <li className='inline-block relative text-neutral-600 font-medium text-lg hover:text-sky-600 transition-colors px-2'><Link to='/'>Inicio</Link></li>
               <li className='inline-block relative text-neutral-600 font-medium text-lg hover:text-sky-600 transition-colors px-2'>
                 <Link to='/products'>Productos</Link>
@@ -49,7 +61,7 @@ const Header = () => {
               )}
 
               {!auth.ID ? (
-                <li className='inline-block relative text-sky-600 font-medium text-lg hover:text-sky-700 transition-colors pl-6'><Link to='/login'>Iniciar Sesion</Link></li>
+                <li className='inline-block relative bg-gradient-to-r from-sky-500 to-sky-700 bg-clip-text text-transparent font-bold text-lg hover:text-sky-700 transition-colors pl-6'><Link to='/login'>Iniciar Sesion</Link></li>
               ) : (
                 <li className='inline-block relative text-red-600 font-medium text-lg hover:text-red-700 transition-colors pl-6'>
                   <button onClick={() => logOut()} >Cerrar Sesion</button>

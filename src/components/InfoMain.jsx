@@ -4,24 +4,7 @@ import Container from "./Container"
 const InfoMain = () => {
   return (
     <div className='flex justify-center relative'>
-        <div className='my-20 mx-2 w-full md:w-2/3 xl:w-1/2'>
-            <Container
-                bgColor={'gray'}
-            >
-                <div className="flex flex-col p-2">
-                    <h2 className="text-2xl uppercase font-bold text-sky-400">Nuestros productos</h2>
-                    <div className="mt-4">
-                        <h3 className="text-xl text-neutral-200 font-semibold">Guantes para exploración</h3>
-                        <p className="text-neutral-300 font-medium mt-2">Optimizados | 240mm</p>
-                        <p className="text-neutral-100 text-lg mt-1 text-justify">En sus presentaciones de látex y de nitrilo, puedes contar con una eficaz barrera biologica al usar cada par de nuestros guantes MaxSafe Innovation. Anatómicos, resistentes, ambidiestros, y con 24cm de largo para una protección más completa de tus manos.</p>
-                    </div>
-                </div>
-
-                <div className="flex flex-col">
-                    <p>Aqui habra una imagen</p>
-                </div>
-            </Container>
-
+        <div className='my-10 mx-0 sm:mx-4 w-full md:w-2/3 xl:w-1/2'>
             <Container
                 bgColor={'white'}
             >

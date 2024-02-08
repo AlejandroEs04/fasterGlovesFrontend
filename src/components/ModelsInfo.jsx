@@ -16,7 +16,7 @@ const ModelsInfo = () => {
   }, [articles])
 
   return (
-    <div className="flex justify-center items-center h-full">
+    <div className="flex justify-center items-center h-full px-4">
       <div className="flex flex-col w-full lg:w-3/4">
         <h2 className="text-2xl uppercase font-bold text-sky-600">Nuestros productos</h2>
         <div className="mt-4">

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import useShop from "../hooks/useShop";
 import Alerta from "../components/Alerta";
@@ -8,6 +8,14 @@ const ForgetPassword = () => {
     const [email, setEmail] = useState('');
 
     const { handleForgetPassword, load, alertas } = useShop();
+
+    const comprobarInfo = useCallback(() => {
+        return email === '' 
+    }, [email])
+    
+    useEffect(() => {
+          comprobarInfo()
+    }, [email])
 
     return (
         <div className='flex justify-center py-20 fondoLogin'>
@@ -44,7 +52,9 @@ const ForgetPassword = () => {
                         />
                     </div>
 
-                    <button className='bg-sky-600 hover:bg-sky-700 transition-colors text-neutral-100 font-bold uppercase rounded px-2 py-1'>
+                    <button 
+                        disabled={comprobarInfo()}
+                        className={`${comprobarInfo() ? 'bg-neutral-200 text-neutral-500' : 'bg-sky-600 hover:bg-sky-700 text-neutral-100'} px-2 py-1 transition-colors font-bold uppercase rounded`}>
                         Enviar Instrucciones
                     </button>
                 </form>

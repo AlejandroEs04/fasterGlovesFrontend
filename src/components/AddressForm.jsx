@@ -11,12 +11,12 @@ const AddressForm = ({button, active}) => {
     const [disable, setDisable] = useState(false);
 
     // Variables del formulario
-    const [address, setAddress] = useState(auth.address);
-    const [neighborhood, setNeighborhood] = useState(auth.neighborhood);
-    const [city, setCity] = useState(auth.city);
-    const [state, setState] = useState(auth.state);
-    const [postalCode, setPostalCode] = useState(auth.postalCode);
-    const [country, setCountry] = useState(auth.country);
+    const [address, setAddress] = useState(auth.address.address);
+    const [neighborhood, setNeighborhood] = useState(auth.address.neighborhood);
+    const [city, setCity] = useState(auth.address.city);
+    const [state, setState] = useState(auth.address.state);
+    const [postalCode, setPostalCode] = useState(auth.address.postalCode);
+    const [country, setCountry] = useState(auth.address.country);
 
     const handleSaveAddress = async() => {
         const token = localStorage.getItem('token');
@@ -56,6 +56,8 @@ const AddressForm = ({button, active}) => {
         setDisable(active)
     }, [])
 
+    console.log(auth)
+
     return (
         <form 
             className='px-5 py-2 flex flex-col gap-1'
@@ -69,6 +71,7 @@ const AddressForm = ({button, active}) => {
                 <LocationSearchInput 
                     setAddress={setAddress}
                     address={address}
+                    status={disable}
                 />
             </div>
 

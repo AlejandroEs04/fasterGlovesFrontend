@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useShop from "../hooks/useShop";
 import useAuth from "../hooks/useAuth";
@@ -25,9 +25,15 @@ const Login = () => {
                 navigate('/');
             }
         }
-
-        
     }
+
+    const comprobarInfo = useCallback(() => {
+        return email === '' || password === '' || password.length <= 9
+    }, [email, password])
+
+    useEffect(() => {
+        comprobarInfo()
+    }, [email, password])
 
     return (
         <div className='flex justify-center py-20 fondoLogin'>
@@ -74,7 +80,8 @@ const Login = () => {
 
                     <div className='flex justify-center mt-5'>
                         <button
-                            className='px-2 py-1 bg-sky-600 hover:bg-sky-700 transition-colors text-neutral-100 font-bold uppercase rounded'
+                            disabled={comprobarInfo()}
+                            className={`${comprobarInfo() ? 'bg-neutral-200 text-neutral-500' : 'bg-sky-600 hover:bg-sky-700 text-neutral-100'} px-2 py-1 transition-colors font-bold uppercase rounded`}
                         >
                             Iniciar Sesion
                         </button>

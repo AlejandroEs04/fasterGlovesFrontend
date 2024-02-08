@@ -3,11 +3,18 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import useShop from '../hooks/useShop'
+import Slider from '../components/Slider'
 
 const MainLayout = () => {
+  const {slider} = useShop()
+
   return (
     <>
-      <main className='bg-white'>
+      {slider && (
+        <Slider />
+      )}
+      <main className={`bg-white ${slider && 'overflow-y-hidden'}`}>
         <Header />
         <div>
           <Outlet />
