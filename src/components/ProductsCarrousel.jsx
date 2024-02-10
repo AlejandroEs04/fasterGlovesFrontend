@@ -15,10 +15,10 @@ const ProductsCarrousel = () => {
     const { products, sizes, handleSaveCarrito } = useShop();
 
     return (
-        <div className='overflow-x-hidden'>
-            <div className='flex gap-4 overflow-x-auto'>
+        <div className='overflow-x-auto w-full'>
+            <div className='flex justify-start md:justify-center gap-4 px-4'>
                 {products?.map(product => (
-                        <div className='bg-neutral-100 rounded p-4 mb-2 w-72 flex flex-col justify-between' key={product.ID}>
+                        <div className='bg-neutral-100 rounded p-4 mb-2 w-72 flex flex-col text-start justify-between min-w-72' key={product.ID}>
                             <div className='mb-2 flex justify-center'>
                                 <img src={product.imageUrl} alt={`Imagen del producto ${product.name}`} className='w-56' />
                             </div>

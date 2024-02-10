@@ -29,7 +29,7 @@ const Admin = () => {
         </div>
 
         <div className="mt-5 w-full">
-          <h2 className="text-xl font-bold text-neutral-600 uppercase">Envios pendientes</h2>
+          <h2 className="text-xl font-bold text-neutral-600 uppercase mb-2">Envios pendientes</h2>
           <div className="flex flex-col gap-4">
             {buys?.map(buy => !buy.delivery[0].delivered && (
               <BuyContainer 
