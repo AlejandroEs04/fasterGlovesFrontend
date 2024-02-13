@@ -102,6 +102,7 @@ const Buy = () => {
 
                         <h3 className="text-xl uppercase font-light text-neutral-600 mt-4">Direccion de entrega</h3>
                         <p className="font-bold text-neutral-600">Direccion: <span className="text-neutral-800 font-normal">{buy?.user?.address}</span></p>
+                        <p className="font-bold text-neutral-600">Street: <span className="text-neutral-800 font-normal">{buy?.user?.street}</span></p>
                         <p className="font-bold text-neutral-600">Numero exterior: <span className="text-neutral-800 font-normal">{buy?.user?.externNumber}</span></p>
                         <p className="font-bold text-neutral-600">Numero interior: <span className="text-neutral-800 font-normal">{buy?.user?.internNumber}</span></p>
                         <p className="font-bold text-neutral-600">Colonia: <span className="text-neutral-800 font-normal">{buy?.user?.neighborhood}</span></p>
