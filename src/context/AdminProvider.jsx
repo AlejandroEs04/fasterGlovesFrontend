@@ -40,7 +40,7 @@ const AdminProvider = ({children}) => {
         const product = new Product(name, price, amount, typeID, description, imagenUrl, XS, S, M, L, XL);
         
         try {
-            const res = await axios.post("http://localhost:4000/api/products", {
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/products`, {
                 product
             })
 
