@@ -140,7 +140,7 @@ const ShopProvider = ({children}) => {
             
             setAlertas({
                 error: false,
-                msg: data.msg
+                msg: 'Revise su correo'
             });
             setLoad(false);
 
