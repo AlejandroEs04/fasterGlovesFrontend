@@ -11,12 +11,15 @@ const AddressForm = ({button, active}) => {
     const [disable, setDisable] = useState(false);
 
     // Variables del formulario
-    const [address, setAddress] = useState(auth.address.address);
-    const [neighborhood, setNeighborhood] = useState(auth.address.neighborhood);
-    const [city, setCity] = useState(auth.address.city);
-    const [state, setState] = useState(auth.address.state);
-    const [postalCode, setPostalCode] = useState(auth.address.postalCode);
-    const [country, setCountry] = useState(auth.address.country);
+    const [address, setAddress] = useState(auth.address);
+    const [street, setStreet] = useState(auth.street);
+    const [externNumber, setExternNumber] = useState(auth.externNumber);
+    const [internNumber, setInternNumber] = useState(auth.internNumber);
+    const [neighborhood, setNeighborhood] = useState(auth.neighborhood);
+    const [city, setCity] = useState(auth.city);
+    const [state, setState] = useState(auth.state);
+    const [postalCode, setPostalCode] = useState(auth.postalCode);
+    const [country, setCountry] = useState(auth.country);
 
     const handleSaveAddress = async() => {
         const token = localStorage.getItem('token');
@@ -30,7 +33,7 @@ const AddressForm = ({button, active}) => {
 
         try {
             const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/api/users/porfile`, {
-                address, neighborhood, city, state, postalCode, country
+                address, neighborhood, city, state, postalCode, country, street, internNumber, externNumber
             }, config)
 
             setAuth(data.user)
@@ -40,7 +43,7 @@ const AddressForm = ({button, active}) => {
             })
 
         } catch (error) {
-            
+            console.log(error)
         }
     }
 
@@ -56,8 +59,6 @@ const AddressForm = ({button, active}) => {
         setDisable(active)
     }, [])
 
-    console.log(auth)
-
     return (
         <form 
             className='px-5 py-2 flex flex-col gap-1'
@@ -72,6 +73,45 @@ const AddressForm = ({button, active}) => {
                     setAddress={setAddress}
                     address={address}
                     status={disable}
+                />
+            </div>
+
+            <div className='flex flex-col'>
+                <label className='font-medium text-neutral-500' htmlFor='colony'>Calle</label>
+                <input 
+                    type='text' 
+                    placeholder='Calle' 
+                    id='street'
+                    className='px-2 py-1 border'
+                    value={street}
+                    onChange={e => setStreet(e.target.value)}
+                    disabled={disable}
+                />
+            </div>
+
+            <div className='flex flex-col'>
+                <label className='font-medium text-neutral-500' htmlFor='extern'>Numero Ext.</label>
+                <input 
+                    type='number' 
+                    placeholder='Numero Ext.' 
+                    id='extern'
+                    className='px-2 py-1 border'
+                    value={externNumber > 0 && externNumber}
+                    onChange={e => setExternNumber(e.target.value)}
+                    disabled={disable}
+                />
+            </div>
+
+            <div className='flex flex-col'>
+                <label className='font-medium text-neutral-500' htmlFor='intern'>Numero Int.</label>
+                <input 
+                    type='number' 
+                    placeholder='Numero Int. ' 
+                    id='intern'
+                    className='px-2 py-1 border'
+                    value={internNumber > 0 && internNumber}
+                    onChange={e => setInternNumber(e.target.value)}
+                    disabled={disable}
                 />
             </div>
 

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth'
 import useShop from '../hooks/useShop';
 import CartProducts from '../components/CartProducts';
@@ -11,12 +12,31 @@ const BuySeccion = () => {
   const [amount, setAmount] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
   const [sent, setSent] = useState(100); 
+  const [completeAddress, setCompleteAddress] = useState(false)
 
   const { cart, handleGetCart } = useShop();
   const { auth } = useAuth();
 
+  const checkAddress = () => {
+    if(
+      auth.address === '' ||
+      auth.city === '' ||
+      auth.state === '' ||
+      auth.country === '' ||
+      auth.street === '' ||
+      auth.externNumber === 0 ||
+      auth.postalCode === '' ||
+      auth.neighborhood === '' 
+    ) {
+      setCompleteAddress(false)
+    } else {
+      setCompleteAddress(true)
+    }
+  }
+
   useEffect(() => {
     handleGetCart();
+    checkAddress();
   }, []);
 
   useEffect(() => {
@@ -59,7 +79,7 @@ const BuySeccion = () => {
   return (
     <div className='flex flex-col items-center py-10'>
       <h1 className='text-2xl font-bold uppercase text-sky-600'>Finalizar Compra</h1>
-      <div className='flex flex-col lg:grid lg:grid-cols-2 w-full md:w-1/2 max-w-1/2 px-4 gap-5 mt-5 md:min-w-max relative'>
+      <div className='flex flex-col-reverse lg:flex-col lg:grid lg:grid-cols-2 w-full md:w-1/2 max-w-1/2 px-4 gap-5 mt-5 md:min-w-max relative'>
         <div className='flex flex-col gap-4 min-h-full md:max-w-md'>
           <div className='bg-white rounded shadow-lg py-2'>
             <h3 className='px-5 text-lg font-bold text-neutral-600 mt-1'>Direccion de entrega</h3>
@@ -74,7 +94,7 @@ const BuySeccion = () => {
           />
         </div>
 
-        <div className='flex flex-col gap-4 w-full sticky top-0'>
+        <div className='flex flex-col gap-4 w-full md:max-w-md'>
           <div className='bg-neutral-600 rounded p-5 flex w-full h-max flex-col'>
             <h3 className='text-neutral-100 font-bold text-2xl'>Resumen de la compra</h3>
 
@@ -86,9 +106,17 @@ const BuySeccion = () => {
             <p className='text-sky-400 font-bold uppercase text-2xl mt-4'>Total: <span className='font-bold text-neutral-100'>{formatearDinero(subtotal + sent)} MXN</span></p>
 
             <div className='mt-10'>
-              <PayPal 
-                total={total}
-              />
+              {completeAddress ? (
+                <PayPal 
+                  total={total}
+                />
+              ) : (
+                <div>
+                  <p className='text-lg text-neutral-100'>La direccion no esta completa, por favor actualiza la direccion de envio <Link to={'/user/porfile/address'} className='text-sky-500'>aqui</Link></p>
+                </div>
+                
+              )}
+              
             </div>
           </div>
         </div>
