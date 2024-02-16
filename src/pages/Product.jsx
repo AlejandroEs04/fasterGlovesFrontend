@@ -29,22 +29,10 @@ const Product = () => {
             <div className="w-full md:w-2/3 lg:w-1/2 mx-2">
                 <h1 className="text-2xl font-bold text-center uppercase">{product[0]?.type.name}</h1> 
                 {product?.map(productContainer => (
-                    <div className="bg-neutral-700 text-neutral-100 rounded p-5 flex flex-col md:flex-row gap-4 mt-5" key={productContainer.ID}>
+                    <div className="bg-neutral-600 text-neutral-100 rounded p-5 flex flex-col md:flex-row gap-4 mt-5" key={productContainer.ID}>
                         <div className="w-2/5">
                             <img src={productContainer.imageUrl} alt={`Imagen del producto ${productContainer.name}`} />
-                        </div>
-
-                        <div className="w-3/5">
-                            <h2 className="font-bold text-xl text-sky-500">{productContainer.name}</h2>
-                            <p className={`${!knowMore && "line-clamp-2"} text-sm`}>{productContainer.description}</p>
-                            <button 
-                                onClick={() => setKnowMore(!knowMore)}
-                                className='text-sm text-sky-500 text-start'
-                            >
-                                {knowMore ? "Ocultar" : "Saber mas..."}
-                            </button>
-
-                            <div className="mt-2 pb-2">
+                            <div className="mt-5 pb-2">
                                 <p className="font-medium">Tallas disponibles: </p>
                                 <div className="flex gap-2 mt-0.5">
                                     {productContainer?.detProductSize.map(size => (
@@ -61,8 +49,21 @@ const Product = () => {
                                 <p className="mt-1 text-lg text-sky-500">Precio: <span className="text-sky-500 font-bold text-xl">{formatearDinero(productContainer.price)} c/u</span></p>
                                 <p className="text-sm">Por cada 10 cajas de guantes del mismo material y talla, en <span className="text-neutral-50 text-lg">{formatearDinero(1000)}</span></p>
                             </div>
+                        </div>
 
-                            <form className="pt-2 border-t">
+                        <div className="w-3/5">
+                            <h2 className="font-bold text-xl text-sky-500">{productContainer.name}</h2>
+                            <p className={`${!knowMore && "line-clamp-2"} text-sm`}>{productContainer.description}</p>
+                            <button 
+                                onClick={() => setKnowMore(!knowMore)}
+                                className='text-sm text-sky-500 text-start'
+                            >
+                                {knowMore ? "Ocultar" : "Saber mas..."}
+                            </button>
+
+                            
+
+                            <form className="pt-2">
                                 <div className="flex flex-col gap-0.5">
                                     <label htmlFor="size">Eliga la talla</label>
                                     <select 

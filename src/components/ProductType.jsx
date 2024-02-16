@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useShop from '../hooks/useShop'
 import { formatearDinero } from '../helpers';
 
@@ -6,10 +6,19 @@ const ProductType = ({id}) => {
     const [knowMore, setKnowMore] = useState(false);
     const [sizeID, setSizeID] = useState(1);
     const [cantidad, setCantidad] = useState(1);
+    const [total, setTotal] = useState(0)
     const {products, types, sizes, handleSaveCarrito} = useShop();
 
     const productsAct = products?.filter(product => product.typeID === id);
     const type = types?.filter(type => type.ID === id);
+
+    useEffect(() => {
+        if(cantidad % 10 === 0 && cantidad > 0) {
+            setTotal((cantidad / 10) * 1000);
+        } else {
+            setTotal(cantidad * productsAct[0].price)
+        }
+    }, [cantidad])
 
     return (
         <div>
@@ -31,7 +40,7 @@ const ProductType = ({id}) => {
                                 {knowMore ? "Ocultar" : "Saber mas..."}
                             </button>
 
-                            <p className='mt-2 font-light text-neutral-600'>Cantidad: <span className='font-bold'>{product.amount}</span></p>
+                            <p className='mt-2 font-light text-neutral-600'>Cantidad: <span className='font-bold'>{product.amount} guantes p/caja</span></p>
                             <p className='font-light text-neutral-600'>Tipo: <span className='font-bold'>{product.type.name}</span></p>
                             <div className='gap-2 items-center grid-cols-2 grid sm:grid-cols-3'>
                                 <label className='font-bold text-neutral-600'>Talla</label>
@@ -50,8 +59,8 @@ const ProductType = ({id}) => {
                             </div>
 
                             <div className='mt-4'>
-                                
-                                <p className='text-xl font-extrabold text-neutral-700 mb-5'>{formatearDinero(product.price)} mxn</p>
+                                <p>El precio por 10 cajas es de {formatearDinero(1000)} mxn</p>
+                                <p className='text-xl font-extrabold text-neutral-700 mb-5'>{formatearDinero(total)} mxn</p>
                                 <div data-tooltip={`Precio: ${cantidad * product.price}`} class="button">
                                     <button onClick={() => handleSaveCarrito(product.ID, sizeID, cantidad)} class="button-wrapper">
                                         <div class="text">Agregar al carrito</div>

@@ -81,7 +81,11 @@ const ShopProvider = ({children}) => {
                 position: toast.POSITION.BOTTOM_RIGHT
             })
         } catch (error) {
-            console.log(error)
+            toast.success("Necesitas iniciar sesion para guardar en el carrito", {
+                position: toast.POSITION.BOTTOM_RIGHT
+            })
+
+            navigate('/login');
         } finally {
             setLoad(false)
         }
@@ -118,6 +122,10 @@ const ShopProvider = ({children}) => {
 
             setAlertas(null)
 
+            toast.success("Bienvenido, ha iniciado sesión", {
+                position: toast.POSITION.BOTTOM_RIGHT
+            })
+
             return data;
         } catch (error) {
             setAlertas(
@@ -145,6 +153,7 @@ const ShopProvider = ({children}) => {
             toast.success("Cuenta creada correctamente", {
                 position: toast.POSITION.BOTTOM_RIGHT
             })
+            
         } catch (error) {
             setAlertas(
                 {
