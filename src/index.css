@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .button {
   --height: 35px;
   --tooltip-height: 35px;

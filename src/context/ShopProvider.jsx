@@ -70,8 +70,6 @@ const ShopProvider = ({children}) => {
                 productID, sizeID, cantidad
             }, config );
 
-            console.log(data)
-
             const cartAct = [
                 ...cart, 
                 data.cart
@@ -292,7 +290,7 @@ const ShopProvider = ({children}) => {
         }
     }
 
-    const deleteProductCart = async(productID, sizeID) => {
+    const deleteProductCart = async(ID) => {
         const token = localStorage.getItem('token');
         
         const config = {
@@ -302,15 +300,13 @@ const ShopProvider = ({children}) => {
             }
         }
 
-        const uptCart = cart?.filter(product => {
-            if(productID !== product.ID && sizeID !== product.sizeID) return product
-        });
+        const uptCart = cart.filter(product => ID !== product.ID);
 
         setCart(uptCart)
 
         try {
-            await axios.post(`${import.meta.env.VITE_API_URL}/api/users/cart/delete`, {
-                productID, sizeID
+            const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/api/users/cart/delete`, {
+                ID
             }, config);
 
             toast.success(data.msg, {

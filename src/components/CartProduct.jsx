@@ -6,7 +6,7 @@ const CartProduct = ({cartProduct, buttons}) => {
     const [cantidad, setCantidad] = useState(cartProduct.cantidad)
     const [active, setActive] = useState(false)
 
-    const { handleSaveCarrito, cart, setCart,deleteProductCart } = useShop();
+    const { handleSaveCarrito, cart, setCart, deleteProductCart } = useShop();
 
     useEffect(() => {
         if(cantidad !== cartProduct.cantidad) {
@@ -86,7 +86,7 @@ const CartProduct = ({cartProduct, buttons}) => {
 
                         <button
                             onClick={() => {
-                                deleteProductCart(cartProduct.productID, cartProduct.sizeID);
+                                deleteProductCart(cartProduct.ID);
                             }}
                             className={`bg-red-500 hover:bg-red-600 text-neutral-100 transition-colors px-2 py-1 rounded-lg mt-2`}
                         >
