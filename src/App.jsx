@@ -24,6 +24,7 @@ import AdminBuy from './pages/AdminBuy'
 import AdminArticles from './pages/AdminArticles'
 import MoreAbout from './pages/MoreAbout'
 import Buy from './pages/Buy'
+import AdminTypes from './pages/AdminTypes';
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
               <Route path='products' element={<AdminProductos />} />
               <Route path='buy' element={<AdminBuy />} />
               <Route path='articles' element={<AdminArticles />} />
+              <Route path='types' element={<AdminTypes />} />
             </Route>
 
             <Route path='/login' element={<MainLayout />}>

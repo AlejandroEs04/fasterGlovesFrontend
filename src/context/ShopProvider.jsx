@@ -350,9 +350,16 @@ const ShopProvider = ({children}) => {
         }
     }
 
+    const handleFillModal = (id) => {
+        const product = products?.filter(product => product.ID === id)
+        console.log(product)
+        
+    }
+
     return (
         <ShopContext.Provider
             value={{
+                handleFillModal,
                 types,
                 products,
                 sizes,

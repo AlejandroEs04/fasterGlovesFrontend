@@ -33,6 +33,13 @@ const AdminSlider = () => {
             >
                 <Link to={'/admin/products'} className='text-neutral-700 text-2xl'>Productos</Link>
             </button>
+
+            <button
+                onClick={() => setSlider(false)}
+                className='text-end'
+            >
+                <Link to={'/admin/types'} className='text-neutral-700 text-2xl'>Modelos</Link>
+            </button>
             
             <button
                 onClick={() => setSlider(false)}

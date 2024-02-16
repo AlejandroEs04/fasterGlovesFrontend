@@ -26,6 +26,7 @@ const AdminHeader = () => {
         <nav className='gap-3 hidden md:flex'>
           <Link to='/admin' className='text-neutral-100 font-bold text-base hover:text-sky-500 transition-colors' >Inicio</Link>
           <Link to='/admin/products' className='text-neutral-100 font-bold text-base hover:text-sky-500 transition-colors' >Productos</Link>
+          <Link to='/admin/types' className='text-neutral-100 font-bold text-base hover:text-sky-500 transition-colors' >Modelos</Link>
           <Link to='/admin/buy' className='text-neutral-100 font-bold text-base hover:text-sky-500 transition-colors' >Compras</Link>
           <Link to='/admin/articles' className='text-neutral-100 font-bold text-base hover:text-sky-500 transition-colors' >Articulos</Link>
         </nav>

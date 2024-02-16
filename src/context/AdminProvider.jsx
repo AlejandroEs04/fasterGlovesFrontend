@@ -18,6 +18,11 @@ function Product(name, price, amount, typeID, description, imageURL, xs, s, m, l
     this.xl = xl;
 }
 
+function Model(name, description) {
+    this.name = name;
+    this.description = description
+}
+
 const AdminProvider = ({children}) => {
     const [name, setName] = useState("");
     const [price, setPrice] = useState(0);
@@ -31,6 +36,9 @@ const AdminProvider = ({children}) => {
     const [L, setL] = useState(true);
     const [XL, setXL] = useState(true);
     const [buys, setBuys] = useState([]);
+
+    const [nameModel, setNameModel] = useState('')
+    const [descriptionModel, setDescriptionModel] = useState('')
 
     useEffect(() => {
         handleGetAllBuy()
@@ -127,9 +135,39 @@ const AdminProvider = ({children}) => {
         }
     }
 
+    const handleSaveModel = async(e) => {
+        const model = new Model(nameModel, descriptionModel);
+
+        const token = localStorage.getItem('token');
+        
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }
+        
+        try {
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/types`, {
+                model
+            }, config)
+
+            toast.success("Cuenta creada correctamente", {
+                position: toast.POSITION.BOTTOM_RIGHT
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <AdminContext.Provider
-            value={{
+            value={{    
+                handleSaveModel,
+                nameModel, 
+                setNameModel,
+                descriptionModel, 
+                setDescriptionModel,
                 setName,
                 name, 
                 setPrice,
