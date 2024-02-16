@@ -1,15 +1,9 @@
 import { useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react'
 import { formatearDinero } from '../helpers';
 
-import 'swiper/css';
-import 'swiper/css/pagination';
-
-import { Pagination, Navigation } from 'swiper/modules';
 import useShop from '../hooks/useShop';
 
 const ProductsCarrousel = () => {
-    const [knowMore, setKnowMore] = useState(false);
     const [sizeID, setSizeID] = useState(1);
     const [cantidad, setCantidad] = useState(1);
     const { products, sizes, handleSaveCarrito } = useShop();
@@ -18,7 +12,7 @@ const ProductsCarrousel = () => {
         <div className='overflow-x-auto w-full'>
             <div className='flex justify-start md:justify-center gap-4 px-4'>
                 {products?.map(product => (
-                        <div className='bg-neutral-100 rounded p-4 mb-2 w-72 flex flex-col text-start justify-between min-w-72' key={product.ID}>
+                        <div className='bg-white shadow hover:shadow-md rounded p-4 mb-2 w-72 flex flex-col text-start justify-between min-w-72' key={product.ID}>
                             <div className='mb-2 flex justify-center'>
                                 <img src={product.imageUrl} alt={`Imagen del producto ${product.name}`} className='w-56' />
                             </div>
