@@ -178,11 +178,17 @@ const AddressForm = ({button, active}) => {
                 </select>
             </div>
 
-            {button && (
+            {button ? (
                 <button
                     className='px-2 py-1 bg-sky-600 hover:bg-sky-700 transition-colors text-neutral-100 font-bold mt-4 rounded'
                 >Guardar Direccion</button>
+            ) : (
+                <button
+                    className='px-2 py-1 bg-neutral-600 hover:bg-neutral-700 transition-colors text-neutral-100 font-bold mt-4 rounded'
+                >Editar Direccion</button>
             )}
+
+            <p className='mt-2 font-bold'>Por el momento solo se hacen entregas dentro del <span className='text-sky-600'>Area Metropolitana de Monterrey</span></p>
             
         </form>
     )
