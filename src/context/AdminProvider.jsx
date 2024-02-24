@@ -4,7 +4,8 @@ import { toast } from "react-toastify";
 
 const AdminContext = createContext();
 
-function Product(name, price, amount, typeID, description, imageURL, xs, s, m, l, xl) {
+function Product(ID, name, price, amount, typeID, description, imageURL, xs, s, m, l, xl) {
+    this.ID = ID
     this.name = name;
     this.price = price;
     this.amount = amount;
@@ -30,31 +31,57 @@ const AdminProvider = ({children}) => {
     const [typeID, setTypeID] = useState(0)
     const [description, setDescription] = useState("");
     const [imagenUrl, setImagenUrl] = useState(null);
-    const [XS, setXS] = useState(true);
-    const [S, setS] = useState(true);
-    const [M, setM] = useState(true);
-    const [L, setL] = useState(true);
-    const [XL, setXL] = useState(true);
+    const [XS, setXS] = useState(false);
+    const [S, setS] = useState(false);
+    const [M, setM] = useState(false);
+    const [L, setL] = useState(false);
+    const [XL, setXL] = useState(false);
     const [buys, setBuys] = useState([]);
 
     const [nameModel, setNameModel] = useState('')
     const [descriptionModel, setDescriptionModel] = useState('')
+    const [productModal, setProductModal] = useState({});
 
     useEffect(() => {
         handleGetAllBuy()
     }, [])
 
-    const handleSaveProduct = async(e) => {
-        const product = new Product(name, price, amount, typeID, description, imagenUrl, XS, S, M, L, XL);
-        
-        try {
-            const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/products`, {
-                product
-            })
+    const handleSaveProduct = async(id) => {
+        const product = new Product(id, name, price, amount, typeID, description, imagenUrl, XS, S, M, L, XL);
 
-            console.log(res);
-        } catch (error) {
-            console.log(error)
+        const token = localStorage.getItem('token');
+        
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        if(id) {
+            try {
+                const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/products/${id}/update`, {
+                    product
+                }, config)
+
+                toast.success(data.msg, {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                })
+            } catch (error) {
+                
+            }
+        } else {
+            try {
+                const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/products`, {
+                    product
+                })
+
+                toast.success(data.msg, {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                })
+            } catch (error) {
+                console.log(error)
+            }
         }
     }
 
@@ -160,6 +187,43 @@ const AdminProvider = ({children}) => {
         }
     }
 
+    const handleFillModal = async(products, id, sizes) => {
+        const product = await products?.filter(product => product.ID === id)
+        setProductModal(product[0])
+
+        const sizesNew = await sizes?.map(size => {
+            const answer = product[0]?.detProductSize?.filter(sizeProduct => sizeProduct.sizeID === size.ID)
+
+            return answer[0]
+        })
+
+        sizesNew.map(size => {
+            if(size) {
+                switch (size.sizeID) {
+                    case 1:
+                        setXS(true)
+                        break;
+                    case 2:
+                        setS(true)
+                        break;
+                    case 3:
+                        setM(true)
+                        break;
+                    case 4:
+                        setL(true)
+                        break;
+                    case 5:
+                        setXL(true)
+                        break;
+                    
+                    default: 
+                        console.log('nada')
+                        break;
+                }
+            }
+        })
+    }
+
     return (
         <AdminContext.Provider
             value={{    
@@ -194,7 +258,10 @@ const AdminProvider = ({children}) => {
                 handleGetAllBuy,
                 buys,
                 handleOnTheWay,
-                handleDelivered
+                handleDelivered,
+                handleFillModal, 
+                productModal,
+                setProductModal
             }}
         >
             {children}

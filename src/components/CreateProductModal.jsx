@@ -1,19 +1,62 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CloudinaryImageWidget from "./CloudinaryImageWidget";
-import useCloudinary from "../hooks/useCloudinary";
 import useShop from "../hooks/useShop";
 import useAdmin from "../hooks/useAdmin";
 
-const CreateProductModal = ({setModal}) => {
-    
+const CreateProductModal = ({setModal, productModal}) => {
     const { types, sizes } = useShop();
-    const { setName, name, setPrice, price, setAmount, amount, setDescription, description, setTypeID, typeID, setImagenUrl, imagenUrl, setXS, XS, setS, S,  setM,  M,  setL,  L,  setXL,  XL, handleSaveProduct} = useAdmin();
+    const { setName, 
+            name, 
+            setPrice, 
+            price, 
+            setAmount, 
+            amount, 
+            setDescription, 
+            description, 
+            setTypeID, 
+            typeID, 
+            setImagenUrl, 
+            imagenUrl, 
+            setXS, 
+            XS, 
+            setS, 
+            S,  
+            setM,  
+            M,  
+            setL,  
+            L,  
+            setXL,  
+            XL, 
+            handleSaveProduct,
+            setProductModal
+        } = useAdmin();
     
+    useEffect(() => {
+        setXS(false)
+        setS(false)
+        setM(false)
+        setL(false)
+        setXL(false)
+
+        setName(productModal.name ?? '' ?? '')
+        setName(productModal.name ?? '')
+        setDescription(productModal.description ?? '')
+        setPrice(productModal.price ?? '')
+        setAmount(productModal.amount ?? '')
+        setImagenUrl(productModal.imageUrl ?? '')
+        setTypeID(productModal.typeID ?? '')
+    }, [])
+
+    console.log(productModal)
+
     return (
         <div className='absolute w-full sm:w-2/3 md:w-1/2 bg-white shadow-lg p-5 rounded'>
             <div className="flex justify-between">
                 <h2 className="text-xl font-bold text-sky-600">Crear Producto</h2>
-                <button onClick={() => setModal(false)}>
+                <button onClick={() => {
+                    setModal(false)
+                    setProductModal({})
+                }}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                     </svg>
@@ -21,7 +64,10 @@ const CreateProductModal = ({setModal}) => {
             </div>
             <p className="text-sm font-bold text-neutral-400" >Ingresa los siguientes datos para guardar el producto</p>
 
-            <form className="mt-5" onSubmit={() => handleSaveProduct()} >
+            <form 
+                className="mt-5" 
+                onSubmit={(e) => handleSaveProduct(productModal.ID)} 
+            >
                 <div className="flex flex-col gap-1">
                     <label htmlFor="name" className="text-base font-medium">Nombre del producto</label>
                     <input 
@@ -113,8 +159,16 @@ const CreateProductModal = ({setModal}) => {
                                         if(e.target.id === "XL") {
                                             setXL(e.currentTarget.checked)
                                         }
-                                    }} 
-                                    defaultChecked
+
+                                        console.log(e.currentTarget.checked)
+                                    }}
+                                    checked={
+                                        size.ID === 1 ? XS : 
+                                        size.ID === 2 ? S :
+                                        size.ID === 3 ? M :
+                                        size.ID === 4 ? L :
+                                        size.ID === 5 ? XL : false
+                                    }
                                 /> 
                                 <p>{size.name}</p>
                             </label>
@@ -123,7 +177,7 @@ const CreateProductModal = ({setModal}) => {
 
                     <div className="flex flex-col gap-1 mt-2">
                         <label className="text-base font-medium">Modelo</label>
-                        <select className="border px-2 py-1 rounded" onChange={(e) => setTypeID(e.target.value)}>
+                        <select className="border px-2 py-1 rounded" value={typeID} onChange={(e) => setTypeID(e.target.value)}>
                             <option> -- SELECCIONE -- </option>
                             {types?.map(type => (
                                 <option key={type.ID} value={type.ID}>{type.name}</option>
@@ -137,7 +191,7 @@ const CreateProductModal = ({setModal}) => {
                         type="submit"
                         className="px-2 py-1 bg-sky-600 text-neutral-100 font-bold uppercase rounded"
                     >
-                        Guardar
+                        {productModal.ID ? 'Editar' : 'Guardar'}
                     </button>
                 </div>
             </form>

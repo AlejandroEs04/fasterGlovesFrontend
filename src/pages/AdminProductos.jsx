@@ -2,12 +2,12 @@ import { useState } from "react";
 import CreateProductModal from "../components/CreateProductModal";
 import useShop from "../hooks/useShop";
 import { formatearDinero } from "../helpers";
-import Loader from "../components/Loader";
 import useAdmin from "../hooks/useAdmin";
 
 const AdminProductos = () => {
   const [modal, setModal] = useState(false);
-  const { products, handleFillModal } = useShop();
+  const { products, sizes } = useShop();
+  const { handleFillModal, productModal } = useAdmin();
 
   return (
     <>
@@ -15,6 +15,7 @@ const AdminProductos = () => {
         {modal && (
           <CreateProductModal 
             setModal={setModal}
+            productModal={productModal}
           />
         )}
       </div>
@@ -59,7 +60,13 @@ const AdminProductos = () => {
                             <td className="p-1 text-center">{formatearDinero(product.price)}</td>
                             <td className="p-1 text-center min-w-36">{product.type.name}</td>
                             <td className="p-1 text-center gap-1 min-h-full">
-                              <button className="bg-sky-700 rounded text-neutral-100 p-0.5">
+                              <button 
+                                className="bg-sky-700 rounded text-neutral-100 p-0.5"
+                                onClick={() => {
+                                  handleFillModal(products, product.ID, sizes)
+                                  setModal(true)
+                                }}
+                              >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                                   <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                                 </svg>
