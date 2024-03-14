@@ -4,7 +4,7 @@ import useShop from '../hooks/useShop';
 import CartProducts from '../components/CartProducts';
 import { formatearDinero } from '../helpers';
 import Loader from '../components/Loader';
-import ProductsCarrousel from '../components/ProductsCarrousel';
+import ProductsList from '../components/ProductsList';
 
 const Cart = () => {
   const [total, setTotal] = useState(0)
@@ -41,7 +41,7 @@ const Cart = () => {
   return (
     <div className='flex flex-col items-center py-10'>
       <h1 className='font-bold uppercase text-sky-600 text-3xl'>Carrito</h1>
-      <div className='flex flex-col lg:grid lg:grid-cols-2 w-full md:w-1/2 px-4 gap-5 mt-5 md:min-w-max'>
+      <div className='flex flex-col lg:grid lg:grid-cols-2 w-full md:w-1/2 px-4 gap-5 my-5 mb-12 md:min-w-max'>
         <div>
           <div className='flex flex-col justify-center gap-4 min-h-full w-full md:max-w-lg'>
             {load && cart.length <= 0 && (
@@ -85,10 +85,10 @@ const Cart = () => {
         </div>
       </div>
 
-      <div className='mt-10 w-full md:w-1/2 px-4 gap-5 md:min-w-max'>
-        <h2 className='text-xl uppercase font-bold text-neutral-600 mb-5'>Productos que te pueden interesar</h2>
-        <ProductsCarrousel />
-      </div>
+      <ProductsList 
+        text='Productos que te pueden interesar'
+        textColor='text-neutral-600'
+      />
     </div>
   )
 }

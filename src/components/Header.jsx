@@ -32,11 +32,6 @@ const Header = () => {
               <li className='inline-block relative text-neutral-600 font-medium text-lg hover:text-sky-600 transition-colors px-2'><Link to='/'>Inicio</Link></li>
               <li className='inline-block relative text-neutral-600 font-medium text-lg hover:text-sky-600 transition-colors px-2'>
                 <Link to='/products'>Productos</Link>
-                <ul className='bg-neutral-50 text-end flex flex-col'>
-                  {types?.map(type => (
-                    <li key={type.ID} className='text-neutral-500 hover:text-neutral-100 hover:bg-sky-600 transition-colors px-2'><Link to={`/products/${type.ID}`}>{type.name}</Link></li>
-                  ))}
-                </ul>
               </li>
 
               <li className='inline-block relative text-neutral-600 font-medium text-lg hover:text-sky-600 transition-colors px-2'>

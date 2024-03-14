@@ -19,12 +19,14 @@ function Product(ID, name, price, amount, typeID, description, imageURL, xs, s, 
     this.xl = xl;
 }
 
-function Model(name, description) {
+function Model(ID, name, description) {
+    this.ID = ID
     this.name = name;
     this.description = description
 }
 
 const AdminProvider = ({children}) => {
+    // Product's variables
     const [name, setName] = useState("");
     const [price, setPrice] = useState(0);
     const [amount, setAmount] = useState(0);
@@ -36,16 +38,22 @@ const AdminProvider = ({children}) => {
     const [M, setM] = useState(false);
     const [L, setL] = useState(false);
     const [XL, setXL] = useState(false);
-    const [buys, setBuys] = useState([]);
 
+    // Model's variables
     const [nameModel, setNameModel] = useState('')
     const [descriptionModel, setDescriptionModel] = useState('')
+
+    // Buy's variables
+    const [buys, setBuys] = useState([]);
     const [productModal, setProductModal] = useState({});
+    const [typeModal, setTypeModal] = useState({})
+    
 
     useEffect(() => {
         handleGetAllBuy()
     }, [])
 
+    /** PRODUCTS CRUD */
     const handleSaveProduct = async(id) => {
         const product = new Product(id, name, price, amount, typeID, description, imagenUrl, XS, S, M, L, XL);
 
@@ -85,6 +93,28 @@ const AdminProvider = ({children}) => {
         }
     }
 
+    const handleDeleteProduct = async(id) => {
+        const token = localStorage.getItem('token');
+        
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+            const { data } = await axios(`${import.meta.env.VITE_API_URL}/api/products/${id}/delete`, config)
+
+            toast.success(data.msg, {
+                position: toast.POSITION.BOTTOM_RIGHT
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    /** BUYS CRUD */
     const handleGetAllBuy = async() => {
         const token = localStorage.getItem('token');
         
@@ -162,8 +192,9 @@ const AdminProvider = ({children}) => {
         }
     }
 
-    const handleSaveModel = async(e) => {
-        const model = new Model(nameModel, descriptionModel);
+    /** MODEL CRUD */
+    const handleSaveModel = async(id) => {
+        const model = new Model(id, nameModel, descriptionModel);
 
         const token = localStorage.getItem('token');
         
@@ -173,18 +204,64 @@ const AdminProvider = ({children}) => {
                 Authorization: `Bearer ${token}`
             }
         }
-        
-        try {
-            const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/types`, {
-                model
-            }, config)
 
-            toast.success("Cuenta creada correctamente", {
+        if(id) {
+            try {
+                const { data } = await axios.put(`${import.meta.env.VITE_API_URL}/api/types/${id}`, {
+                    model
+                }, config)
+
+                console.log(data)
+
+                toast.success(data.msg, {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                })
+            } catch (error) {
+                console.log(error)
+            }
+        } else {
+            try {
+                const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/api/types`, {
+                    model
+                }, config)
+
+                toast.success(data.msg, {
+                    position: toast.POSITION.BOTTOM_RIGHT
+                })
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
+
+    const handleDeleteModel = async(id) => {
+        const token = localStorage.getItem('token');
+        
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }
+        try {
+            const { data } = await axios.delete(`${import.meta.env.VITE_API_URL}/api/types/${id}`, config)
+
+            toast.success(data.msg, {
                 position: toast.POSITION.BOTTOM_RIGHT
             })
         } catch (error) {
             console.log(error)
         }
+    }
+
+    /** FUNCIONES */
+    const handleFillModel = async(types, id) => {
+        const model = types?.filter(type => type.ID === id);
+
+        setTypeModal(model[0])
+
+        setNameModel(model[0].name)
+        setDescriptionModel(model[0].description)
     }
 
     const handleFillModal = async(products, id, sizes) => {
@@ -224,10 +301,13 @@ const AdminProvider = ({children}) => {
         })
     }
 
+    
+
     return (
         <AdminContext.Provider
             value={{    
                 handleSaveModel,
+                handleDeleteProduct,
                 nameModel, 
                 setNameModel,
                 descriptionModel, 
@@ -261,7 +341,10 @@ const AdminProvider = ({children}) => {
                 handleDelivered,
                 handleFillModal, 
                 productModal,
-                setProductModal
+                setProductModal, 
+                handleFillModel, 
+                typeModal, 
+                handleDeleteModel
             }}
         >
             {children}

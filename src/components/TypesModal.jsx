@@ -1,11 +1,10 @@
 import React from 'react'
 import useAdmin from '../hooks/useAdmin'
 
-const TypesModal = () => {
-    const { handleSaveModel, setNameModel, nameModel, setDescriptionModel, descriptionModel } = useAdmin();
-
+const TypesModal = ({setModal}) => {
+    const { handleSaveModel, setNameModel, nameModel, setDescriptionModel, descriptionModel, typeModal } = useAdmin();
     return (
-      <div className='absolute w-full sm:w-2/3 md:w-1/2 bg-white shadow-lg p-5 rounded'>
+      <div className='absolute w-full sm:w-2/3 md:w-1/2 bg-white xl:w-1/3 bg-opacity-80 backdrop-blur shadow-lg p-5 rounded'>
             <div className="flex justify-between">
                 <h2 className="text-xl font-bold text-sky-600">Crear Modelo</h2>
                 <button onClick={() => setModal(false)}>
@@ -14,9 +13,9 @@ const TypesModal = () => {
                     </svg>
                 </button>
             </div>
-            <p className="text-sm font-bold text-neutral-400" >Ingresa los siguientes datos para guardar el producto</p>
+            <p className="text-sm font-bold text-neutral-400" >Ingresa los siguientes datos para guardar el modelo</p>
 
-            <form className="mt-5" onSubmit={() => handleSaveModel()} >
+            <form className="mt-5" onSubmit={() => handleSaveModel(typeModal.ID)} >
                 <div className="flex flex-col gap-1">
                     <label htmlFor="name" className="text-base font-medium">Nombre del modelo</label>
                     <input 

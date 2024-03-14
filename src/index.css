@@ -111,9 +111,15 @@
   bottom: calc(var(--height) + var(--gap-between-tooltip-to-button));
 }
 
+.fondoGrid {
+  background-image: linear-gradient(#0000006b 2.5px, transparent 2.5px), linear-gradient(to right, #000000 2.5px, transparent 2.5px);
+  background-size: 15px 15px;
+  background-color: rgba(232, 232, 232, 0);
+}
 
-
-
+.redondeoImagen {
+  border-radius: 10rem 0;
+}
 
 .fondoLogin {
   background-image: radial-gradient(#0284c7 2px, transparent 2px);

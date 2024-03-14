@@ -22,32 +22,32 @@ const Product = () => {
 
     const { products,handleSaveCarrito } = useShop();
 
-    const product = products?.filter(product => +product.typeID === +id);
+    const product = products?.filter(product => +product.ID === +id);
 
     return (
         <div className="flex justify-center py-5">
             <div className="w-full md:w-2/3 lg:w-1/2 mx-2">
                 <h1 className="text-2xl font-bold text-center uppercase">{product[0]?.type.name}</h1> 
                 {product?.map(productContainer => (
-                    <div className="bg-neutral-600 text-neutral-100 rounded p-5 flex flex-col md:flex-row gap-4 mt-5" key={productContainer.ID}>
+                    <div className=" text-neutral-800 rounded p-5 flex flex-col md:flex-row gap-10 mt-5" key={productContainer.ID}>
                         <div className="w-2/5">
                             <img src={productContainer.imageUrl} alt={`Imagen del producto ${productContainer.name}`} />
                             <div className="mt-5 pb-2">
                                 <p className="font-medium">Tallas disponibles: </p>
                                 <div className="flex gap-2 mt-0.5">
                                     {productContainer?.detProductSize.map(size => (
-                                        <div key={size.size.ID} className="bg-neutral-500 w-6 text-center rounded bg-opacity-90 backdrop-blur-xl">
+                                        <div key={size.size.ID} className="bg-neutral-500 text-neutral-50 font-medium w-6 h-6 text-center rounded bg-opacity-90 backdrop-blur-xl">
                                             {size.size.letter}
                                         </div>
                                     ))}
                                 </div>
 
-                                <p className="mt-4">Material: <span className="text-neutral-50 uppercase font-bold">{productContainer.type.name}</span></p>
+                                <p className="mt-4">Material: <span className="text-neutral-800 uppercase font-bold">{productContainer.type.name}</span></p>
 
                                 <p className="mt-1">Cantidad de guantes por caja: <span className="text-neutral-50 font-bold">{productContainer.amount} c/u</span></p>
 
-                                <p className="mt-1 text-lg text-sky-500">Precio: <span className="text-sky-500 font-bold text-xl">{formatearDinero(productContainer.price)} c/u</span></p>
-                                <p className="text-sm">Por cada 10 cajas de guantes del mismo material y talla, en <span className="text-neutral-50 text-lg">{formatearDinero(1000)}</span></p>
+                                <p className="mt-1 text-lg text-sky-600 font-semibold">Precio: <span className="text-neutral-700 font-bold text-xl">{formatearDinero(productContainer.price)} MXN</span></p>
+                                <p className="text-sm">Por cada 10 cajas de guantes del mismo material y talla, en <span className="text-neutral-700 font-bold text-lg">{formatearDinero(1000)}</span></p>
                             </div>
                         </div>
 
@@ -68,7 +68,7 @@ const Product = () => {
                                     <label htmlFor="size">Eliga la talla</label>
                                     <select 
                                         id="size" 
-                                        className="px-2 py-1 text-neutral-600"
+                                        className="px-2 py-1 text-neutral-600 border rounded"
                                         value={sizeID}
                                         onChange={e => setSizeID(e.target.value)}
                                     >
@@ -83,7 +83,7 @@ const Product = () => {
                                     <input 
                                         type="number" 
                                         id="number" 
-                                        className="px-2 py-1 text-neutral-600"
+                                        className="px-2 py-1 text-neutral-600 border rounded"
                                         value={cantidad}
                                         onChange={e => setCantidad(e.target.value)} 
                                     />
