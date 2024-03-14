@@ -36,7 +36,8 @@ const ProductsList = ({text = 'Productos', textColor = 'text-sky-600'}) => {
                                 <div className="flex gap-2 py-1">
                                 {product?.detProductSize?.map(size => (
                                     <button 
-                                    className="text-sm bg-neutral-500 text-neutral-100 font-semibold p-0.5 w-6 h-6 text-center rounded bg-opacity-95 shadow-sm"
+                                        key={size.ID}
+                                        className="text-sm bg-neutral-500 text-neutral-100 font-semibold p-0.5 w-6 h-6 text-center rounded bg-opacity-95 shadow-sm"
                                     >{size.size.letter}</button>
                                 ))}
                                 </div>

@@ -16,7 +16,7 @@ const Product = () => {
         if(cantidad % 10 === 0 && cantidad > 0) {
             setTotal((cantidad / 10) * 1000);
         } else {
-            setTotal(cantidad * product[0].price)
+            setTotal(cantidad * product[0]?.price)
         }
     }, [cantidad])
 
@@ -63,7 +63,10 @@ const Product = () => {
 
                             
 
-                            <form className="pt-2">
+                            <form className="pt-2" onSubmit={(e) => {
+                                e.preventDefault()
+                                handleSaveCarrito(productContainer.ID, sizeID, cantidad)
+                            }}>
                                 <div className="flex flex-col gap-0.5">
                                     <label htmlFor="size">Eliga la talla</label>
                                     <select 
@@ -93,7 +96,7 @@ const Product = () => {
 
                                 <div className='mt-4'>
                                     <button
-                                        onClick={() => handleSaveCarrito(productContainer.ID, sizeID, cantidad)} 
+                                        type="submit"
                                         className='bg-sky-600 w-full justify-center px-2 py-1 rounded mt-2 flex gap-2 items-center text-neutral-100 hover:bg-sky-700 transition-colors'
                                     >
                                         <p>Agregar al carrito</p>

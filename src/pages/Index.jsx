@@ -1,20 +1,9 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
 import ProductosInicio from '../components/ProductosInicio'
 import MainCarrousel from "../components/MainCarrousel";
 import imageOfrecemos from '../../public/img/mainImageGuantes.jpg';
-import useShop from "../hooks/useShop";
-import { formatearDinero } from "../helpers";
 import ProductsList from "../components/ProductsList";
 
 const Index = () => {
-  const [knowMore, setKnowMore] = useState(false);
-  const [cantidad, setCantidad] = useState(1);
-
-  const { products } = useShop();
-
-  console.log(products)
-
   return (
     <div>
       <MainCarrousel />

@@ -79,8 +79,8 @@ const BuySeccion = () => {
   return (
     <div className='flex flex-col items-center py-10'>
       <h1 className='text-2xl font-bold uppercase text-sky-600'>Finalizar Compra</h1>
-      <div className='flex flex-col lg:flex-col lg:grid lg:grid-cols-2 w-full md:w-1/2 max-w-1/2 px-4 gap-5 mt-5 md:min-w-max relative'>
-        <div className='flex flex-col gap-4 min-h-full md:max-w-md'>
+      <div className='flex flex-col-reverse md:w-3/4 lg:grid lg:grid-cols-2 w-full xl:w-1/2 px-4 gap-5 mt-5'>
+        <div className='flex flex-col gap-4 min-h-full '>
           <div className='bg-white rounded shadow-lg py-2'>
             <h3 className='px-5 text-lg font-bold text-neutral-600 mt-1'>Direccion de entrega</h3>
             <AddressForm 
@@ -103,8 +103,8 @@ const BuySeccion = () => {
           />
         </div>
 
-        <div className='flex flex-col gap-4 w-full md:max-w-md'>
-          <div className='bg-neutral-600 rounded p-5 flex w-full h-max flex-col'>
+        <div className='h-full'>
+          <div className='bg-neutral-600 rounded p-5 sticky top-20'>
             <h3 className='text-neutral-100 font-bold text-2xl'>Resumen de la compra</h3>
 
             <p className='text-sky-400 font-semibold uppercase text-lg mt-4'>Subtotal: <span className='font-bold text-neutral-100'>{formatearDinero(subtotal)} MXN</span></p>

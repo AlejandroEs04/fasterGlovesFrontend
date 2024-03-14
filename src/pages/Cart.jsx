@@ -18,7 +18,7 @@ const Cart = () => {
 
   useEffect(() => {
     if(cart.length >= 1) {
-        const calculoTotal = cart.reduce((total, cartProduct) => total + (
+        const calculoTotal = cart?.reduce((total, cartProduct) => total + (
           // El carrito tiene mas de 10 productos 
           cartProduct.cantidad >= 10 ?
           // El residuo de la cantidad de productos es 0
