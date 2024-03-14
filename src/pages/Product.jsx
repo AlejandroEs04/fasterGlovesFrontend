@@ -26,12 +26,12 @@ const Product = () => {
 
     return (
         <div className="flex justify-center py-5">
-            <div className="w-full md:w-2/3 lg:w-1/2 mx-2">
-                <h1 className="text-2xl font-bold text-center uppercase">{product[0]?.type.name}</h1> 
+            <div className="w-full md:w-4/5 xl:w-1/2 mx-2">
+                <h1 className="text-2xl font-bold uppercase">{product[0]?.type.name}</h1> 
                 {product?.map(productContainer => (
                     <div className=" text-neutral-800 rounded p-5 flex flex-col md:flex-row gap-10 mt-5" key={productContainer.ID}>
-                        <div className="w-2/5">
-                            <img src={productContainer.imageUrl} alt={`Imagen del producto ${productContainer.name}`} />
+                        <div className="w-full md:w-1/2">
+                            <img src={productContainer.imageUrl} alt={`Imagen del producto ${productContainer.name}`} className="w-full max-w-xs" />
                             <div className="mt-5 pb-2">
                                 <p className="font-medium">Tallas disponibles: </p>
                                 <div className="flex gap-2 mt-0.5">
@@ -51,7 +51,7 @@ const Product = () => {
                             </div>
                         </div>
 
-                        <div className="w-3/5">
+                        <div className="w-full md:w-1/2">
                             <h2 className="font-bold text-xl text-sky-500">{productContainer.name}</h2>
                             <p className={`${!knowMore && "line-clamp-2"} text-sm`}>{productContainer.description}</p>
                             <button 
