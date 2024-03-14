@@ -3,7 +3,7 @@ import useAdmin from "../hooks/useAdmin"
 import BuyContainer from "../components/BuyContainer";
 
 const Admin = () => {
-  const {buys} = useAdmin();
+  const { buys } = useAdmin();
 
   return (
     <div className='flex justify-center py-10 px-5'>
@@ -33,6 +33,7 @@ const Admin = () => {
           <div className="flex flex-col gap-4">
             {buys?.map(buy => !buy.delivery[0].delivered && (
               <BuyContainer 
+                key={buy.ID}
                 buy={buy}
               />
             ))}

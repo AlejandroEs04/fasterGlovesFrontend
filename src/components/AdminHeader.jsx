@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom"
-import logo from '../../public/img/LogoAdminWhite.png'
 import useShop from "../hooks/useShop"
 
 const AdminHeader = () => {
@@ -8,7 +7,7 @@ const AdminHeader = () => {
   return (
     <div className='bg-neutral-700 px-2 py-3 flex items-center justify-around'>
         <Link to={'/'}>
-          <img src={logo} alt="Logo Admin" className='w-32'/>
+          <img src="/img/LogoAdminWhite.png" alt="Logo Admin" className='w-32'/>
         </Link>
 
         <ul className='flex md:hidden items-center text-neutral-100'>

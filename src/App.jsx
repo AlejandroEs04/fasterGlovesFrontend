@@ -25,6 +25,7 @@ import AdminArticles from './pages/AdminArticles'
 import MoreAbout from './pages/MoreAbout'
 import Buy from './pages/Buy'
 import AdminTypes from './pages/AdminTypes';
+import ClientSupport from './pages/ClientSupport';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
               <Route path='products' element={<Products />} />
               <Route path='products/:id' element={<Product />} />
               <Route path='moreAbout/:id' element={<MoreAbout />} />
+              <Route path='support' element={<ClientSupport />} />
             </Route>
 
             <Route path='/buy' element={<RutaProtegida />}>

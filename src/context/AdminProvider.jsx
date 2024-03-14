@@ -128,7 +128,7 @@ const AdminProvider = ({children}) => {
         try {
             const { data } = await axios(`${import.meta.env.VITE_API_URL}/api/buy/admin`, config)
 
-            setBuys(data.buys)
+            setBuys(data?.buys)
         } catch (error) {
             console.log(error)
         }

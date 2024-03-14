@@ -1,8 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import useShop from '../hooks/useShop'
-import ddcodelogo from "../../public/img/ddcodeLogo.svg"
-import logo from '../../public/img/LogoWhite.png'
 
 const Footer = () => {
     const { types } = useShop();
@@ -12,7 +10,7 @@ const Footer = () => {
             <div className='flex flex-col sm:grid md:grid-cols-2 w-full md:w-2/3 xl:w-1/2'>
                 <div>
                     <Link to={'/'} className="flex flex-col items-center md:items-start justify-center">
-                        <img src={logo} alt="logo DD-code" className="w-36" />
+                        <img src="/img/LogoWhite.png" alt="Logo de Faster" className="w-36" />
                     </Link>
                     <div className="flex flex-col md:items-start items-center mt-10">
                         <p className="text-sky-600 font-bold text-sm">Desarrollado por:</p>

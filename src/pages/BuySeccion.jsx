@@ -66,7 +66,7 @@ const BuySeccion = () => {
           setSent(400)
         }
       } else {
-        const calculoSent = cart.reduce((sent, cartProduct) => sent + cartProduct.cantidad * 20, 0)
+        const calculoSent = cart.reduce((sent, cartProduct) => sent + cartProduct.cantidad * 0, 0)
         setSent(calculoSent)
       }
     }

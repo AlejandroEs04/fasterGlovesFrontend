@@ -1,6 +1,5 @@
 import ProductosInicio from '../components/ProductosInicio'
 import MainCarrousel from "../components/MainCarrousel";
-import imageOfrecemos from '../../public/img/mainImageGuantes.jpg';
 import ProductsList from "../components/ProductsList";
 
 const Index = () => {
@@ -20,7 +19,7 @@ const Index = () => {
 
           <div className="flex px-10 pb-5 md:p-0 justify-center items-center lg:col-span-2 relative">
             <div className="sm:max-w-sm border fondoGrid p-5">
-              <img src={imageOfrecemos} alt="Guantes" className="redondeoImagen" />
+              <img src="/img/mainImageGuantes.jpg" alt="Guantes" className="redondeoImagen" />
             </div>
 
             <div className="fondoGrid w-full h-full absolute -z-10"></div>

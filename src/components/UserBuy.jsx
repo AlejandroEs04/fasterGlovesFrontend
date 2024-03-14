@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import { formatearDinero } from "../helpers"
 
 const UserBuy = ({buy}) => {
@@ -20,7 +21,7 @@ const UserBuy = ({buy}) => {
 
     return (
         <div className="bg-white p-4 rounded-xl shadow flex flex-col lg:grid lg:grid-cols-2 gap-4 w-full">
-            <div>
+            <div className="flex flex-col">
                 <h3 className=" text-lg font-bold uppercase mb-2">Informacion del pedido</h3>
                 <p className="font-bold">ID: <span className=" font-normal">{buy.ID}</span></p>
                 <p className="font-bold">Total: <span className=" font-normal">{formatearDinero(buy.amount)}</span></p>
@@ -29,6 +30,10 @@ const UserBuy = ({buy}) => {
                 <p className="font-bold">Nombre: <span className="font-normal">{buy.user.name + ' ' + buy.user.lastName}</span></p>
                 <p className="font-bold">Correo: <span className="font-normal">{buy.user.email}</span></p>
                 <p className="font-bold">Numero: <span className="font-normal">{buy.user.number}</span></p>
+                <Link 
+                    to={`/buy/${buy.ID}`}
+                    className="bg-sky-600 text-neutral-100 px-2 py-1 rounded hover:bg-sky-700 mt-5 text-center"
+                >Ver Productos</Link>
             </div>
 
             <div>

@@ -264,7 +264,7 @@ const ShopProvider = ({children}) => {
         }
 
         try {
-            const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/api/buy/`, {
+            const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/api/buy`, {
                 total
             }, config)
 

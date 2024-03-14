@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react"
-import guanteImage from "../../public/img/guantes.png"
 import useShop from "../hooks/useShop"
-import ArticleMain from "./ArticleMain";
 
 const ModelsInfo = () => {
   const [mainSection, setMainSection] = useState(null);

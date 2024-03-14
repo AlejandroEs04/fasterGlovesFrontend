@@ -25,8 +25,8 @@ const PayPal = ({total}) => {
                     await addPurchase(total)
                 }}
 
-                onCancel={(data) => {
-                    console.log(data)
+                onCancel={async(data) => {
+                    
                 }}
                 forceReRender={[total]}
             />

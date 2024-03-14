@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
 import useShop from '../hooks/useShop';
 import useAuth from '../hooks/useAuth';
-import Logo from '../../public/img/Logo.png'
-import { useState } from 'react';
 
 const Header = () => {
   const { types, setSlider, slider } = useShop();
@@ -12,7 +10,7 @@ const Header = () => {
     <>
       <header className='top-0 sticky bg-neutral-300 bg-opacity-65 backdrop-blur-lg w-full flex items-center justify-around px-2 py-3 shadow-lg z-10'>
         <Link to={'/'} className='flex h-full items-start'>
-          <img src={Logo} alt="Logo Faster Gloves" className='w-32' />
+          <img src="/img/Logo.png" alt="Logo Faster Gloves" className='w-32' />
         </Link>
 
         <div>

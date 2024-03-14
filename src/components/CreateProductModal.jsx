@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import CloudinaryImageWidget from "./CloudinaryImageWidget";
 import useShop from "../hooks/useShop";
 import useAdmin from "../hooks/useAdmin";
