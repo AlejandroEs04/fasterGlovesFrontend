@@ -83,6 +83,10 @@ const BuyContainer = ({buy}) => {
                             className="bg-sky-600 text-neutral-100 font-bold px-2 py-1 rounded hover:bg-sky-700 transition-colors"
                         >En camino</button>
                     )}
+
+                    <button 
+                        className="bg-red-500 px-2 py-1 text-neutral-100 font-bold hover:bg-red-600 transition-colors rounded"
+                    >Eliminar</button>
                 </div>
             </div>
         </div>

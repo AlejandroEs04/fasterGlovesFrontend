@@ -5,6 +5,7 @@ import AdminHeader from '../components/AdminHeader'
 import { AdminProvider } from '../context/AdminProvider'
 import useShop from '../hooks/useShop';
 import AdminSlider from '../components/AdminSlider';
+import ConfirmModal from '../components/ConfirmModal';
 
 const AdminLayout = () => {
   const { auth, loading } = useAuth();
@@ -26,6 +27,8 @@ const AdminLayout = () => {
               <Outlet />
             </div>
           </main>
+
+          <ConfirmModal />
         </AdminProvider> 
       ) : <Navigate to="/" />}
     </>

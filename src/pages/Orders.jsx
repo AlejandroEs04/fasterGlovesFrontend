@@ -23,6 +23,7 @@ const Orders = () => {
             <UserBuy 
               key={order.ID}
               buy={order}
+              steps={true}
             />
           ))}
         </div>

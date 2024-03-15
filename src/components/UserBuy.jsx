@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { formatearDinero } from "../helpers"
 
-const UserBuy = ({buy}) => {
+const UserBuy = ({buy, steps = false}) => {
     const [step, setStep] = useState(0)
     
     const checkStep = () => {
@@ -36,39 +36,41 @@ const UserBuy = ({buy}) => {
                 >Ver Productos</Link>
             </div>
 
-            <div>
+            {steps && (
                 <div>
-                    <div className="flex justify-between">
-                        <p className=" font-semibold text-sm">Recibido</p> 
-                        <p className=" font-semibold text-sm">En camino</p> 
-                        <p className=" font-semibold text-sm">Entregado</p> 
+                    <div>
+                        <div className="flex justify-between">
+                            <p className=" font-semibold text-sm">Recibido</p> 
+                            <p className=" font-semibold text-sm">En camino</p> 
+                            <p className=" font-semibold text-sm">Entregado</p> 
+                        </div>
+                    
+                        <div className="w-full h-2 bg-slate-300 rounded">
+                            <div
+                                style={{
+                                    width: step + '%'
+                                }}
+                                className="bg-amber-500 h-full rounded-lg"
+                            ></div>
+                        </div>
                     </div>
-                
-                    <div className="w-full h-2 bg-slate-300 rounded">
-                        <div
-                            style={{
-                                width: step + '%'
-                            }}
-                            className="bg-amber-500 h-full rounded-lg"
-                        ></div>
-                    </div>
-                </div>
-                <p className="mt-4 font-bold">Status del pedido</p>
-                {buy.delivery[0].delivered ? (
-                    <p className=" font-semibold text-green-500">Entregado</p>
-                ) : buy.delivery[0].onTheWay ? (
-                    <p className=" font-semibold text-green-500">En camino</p>
-                ) : (
-                    <p className=" font-semibold text-green-500">Recibido</p>
-                )}
+                    <p className="mt-4 font-bold">Status del pedido</p>
+                    {buy.delivery[0].delivered ? (
+                        <p className=" font-semibold text-green-500">Entregado</p>
+                    ) : buy.delivery[0].onTheWay ? (
+                        <p className=" font-semibold text-green-500">En camino</p>
+                    ) : (
+                        <p className=" font-semibold text-green-500">Recibido</p>
+                    )}
 
-                <div className="mt-2 flex flex-col gap-1">
-                    <p className="text-neutral-700 font-bold text-lg">Direccion de entrega</p>
-                    <p className=" font-semibold">Direccion: <span className=" font-normal">{buy.user.address}</span></p>
-                    <p className=" font-semibold">Municipio: <span className=" font-normal">{buy.user.city}</span></p>
-                    <p className=" font-semibold">C.P. <span className=" font-normal">{buy.user.postalCode}</span></p>
+                    <div className="mt-2 flex flex-col gap-1">
+                        <p className="text-neutral-700 font-bold text-lg">Direccion de entrega</p>
+                        <p className=" font-semibold">Direccion: <span className=" font-normal">{buy.user.address}</span></p>
+                        <p className=" font-semibold">Municipio: <span className=" font-normal">{buy.user.city}</span></p>
+                        <p className=" font-semibold">C.P. <span className=" font-normal">{buy.user.postalCode}</span></p>
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     )
 }
