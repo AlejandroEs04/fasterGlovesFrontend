@@ -22,7 +22,7 @@ const PayPal = ({total}) => {
                 }}
 
                 onApprove={async(data, actions) => {
-                    await addPurchase(total)
+                    await addPurchase(total, data.orderID)
                 }}
 
                 onCancel={async(data) => {

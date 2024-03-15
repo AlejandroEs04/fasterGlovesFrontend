@@ -268,13 +268,13 @@ const ShopProvider = ({children}) => {
                 total
             }, config)
 
-            return data.id
+            return data.response.result.id
         } catch (error) {
             console.log(error)
         }
     }
 
-    const addPurchase = async(total) => {
+    const addPurchase = async(total, orderID) => {
         const token = localStorage.getItem('token');
         
         const config = {
@@ -286,7 +286,7 @@ const ShopProvider = ({children}) => {
 
         try {
             const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/api/buy/complete`, {
-                total
+                total, orderID
             }, config);
 
             toast.success(data.msg, {
