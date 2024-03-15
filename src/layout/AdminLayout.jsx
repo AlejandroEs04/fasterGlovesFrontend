@@ -27,8 +27,6 @@ const AdminLayout = () => {
               <Outlet />
             </div>
           </main>
-
-          <ConfirmModal />
         </AdminProvider> 
       ) : <Navigate to="/" />}
     </>

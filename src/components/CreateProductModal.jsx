@@ -64,7 +64,9 @@ const CreateProductModal = ({setModal, productModal}) => {
 
             <form 
                 className="mt-5" 
-                onSubmit={(e) => handleSaveProduct(productModal.ID)} 
+                onSubmit={() => {
+                    handleSaveProduct(productModal.ID)
+                }} 
             >
                 <div className="flex flex-col gap-1">
                     <label htmlFor="name" className="text-base font-medium">Nombre del producto</label>

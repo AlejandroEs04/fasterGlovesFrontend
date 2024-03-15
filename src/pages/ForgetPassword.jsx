@@ -7,7 +7,11 @@ import Loader from "../components/Loader";
 const ForgetPassword = () => {
     const [email, setEmail] = useState('');
 
-    const { handleForgetPassword, load, alertas } = useShop();
+    const { handleForgetPassword, load, alertas, setAlertas } = useShop();
+
+    useEffect(() => {
+        setAlertas(null)
+    }, [])
 
     const comprobarInfo = useCallback(() => {
         return email === '' 

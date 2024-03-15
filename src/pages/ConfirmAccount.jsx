@@ -6,7 +6,11 @@ import useShop from '../hooks/useShop'
 import Alerta from '../components/Alerta';
 
 const ConfirmAccount = () => {
-    const { load, alertas, handleConfirmAccount } = useShop();
+    const { load, alertas, handleConfirmAccount, setAlertas } = useShop();
+
+    useEffect(() => {
+        setAlertas(null)
+    }, [])
 
     const params = useParams();
     const { token } = params

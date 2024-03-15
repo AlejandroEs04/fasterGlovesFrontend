@@ -3,18 +3,19 @@ import CreateProductModal from "../components/CreateProductModal";
 import useShop from "../hooks/useShop";
 import { formatearDinero } from "../helpers";
 import useAdmin from "../hooks/useAdmin";
+import ConfirmModal from "../components/ConfirmModal";
 
 const AdminProductos = () => {
-  const [modal, setModal] = useState(false);
+  const [modalAct, setModalAct] = useState(false);
   const { products, sizes } = useShop();
-  const { handleFillModal, productModal, handleDeleteProduct } = useAdmin();
+  const { handleFillModal, productModal, handleDeleteProduct, modal, setModal, setDeleteId } = useAdmin();
 
   return (
     <>
-      <div className={`justify-center sm:m-8 ${modal ? 'flex' : 'hidden'}`}>
-        {modal && (
+      <div className={`justify-center sm:m-8 ${modalAct ? 'flex' : 'hidden'}`}>
+        {modalAct && (
           <CreateProductModal 
-            setModal={setModal}
+            setModal={setModalAct}
             productModal={productModal}
           />
         )}
@@ -28,7 +29,7 @@ const AdminProductos = () => {
           <div className='mt-5'>
             <div className='flex justify-end items-center'>
               <button 
-                onClick={() => setModal(true)}
+                onClick={() => setModalAct(true)}
                 className='px-2 py-1 text-neutral-100 bg-sky-600 hover:bg-sky-700 transition-colors rounded'
               >
                 + Crear
@@ -64,7 +65,7 @@ const AdminProductos = () => {
                                 className="bg-sky-700 rounded text-neutral-100 p-0.5"
                                 onClick={() => {
                                   handleFillModal(products, product.ID, sizes)
-                                  setModal(true)
+                                  setModalAct(true)
                                 }}
                               >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
@@ -74,7 +75,10 @@ const AdminProductos = () => {
 
                               <button 
                                 type="button"
-                                onClick={e => handleDeleteProduct(product.ID)}
+                                onClick={() => {
+                                  setModal(true)
+                                  setDeleteId(product.ID)
+                                }}
                                 className="bg-red-600 rounded text-neutral-100 p-0.5 ml-2"
                               >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
@@ -99,6 +103,16 @@ const AdminProductos = () => {
           </div>
         </div>
       </div>
+
+      {modal && (
+        <ConfirmModal 
+          title={'Alerta'}
+          text={'¿Estas seguro que quieres eliminar este elemento?'}
+          btnAction={'Eliminar'}
+          btnColor={'red'}
+          func={handleDeleteProduct}
+        />
+      )}
     </>
   )
 }

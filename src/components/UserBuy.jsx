@@ -36,33 +36,34 @@ const UserBuy = ({buy, steps = false}) => {
                 >Ver Productos</Link>
             </div>
 
-            {steps && (
                 <div>
-                    <div>
-                        <div className="flex justify-between">
-                            <p className=" font-semibold text-sm">Recibido</p> 
-                            <p className=" font-semibold text-sm">En camino</p> 
-                            <p className=" font-semibold text-sm">Entregado</p> 
+                    {steps && (
+                        <div>
+                            <div className="flex justify-between">
+                                <p className=" font-semibold text-sm">Recibido</p> 
+                                <p className=" font-semibold text-sm">En camino</p> 
+                                <p className=" font-semibold text-sm">Entregado</p> 
+                            </div>
+                        
+                            <div className="w-full h-2 bg-slate-300 rounded">
+                                <div
+                                    style={{
+                                        width: step + '%'
+                                    }}
+                                    className="bg-amber-500 h-full rounded-lg"
+                                ></div>
+                            </div>
                         </div>
-                    
-                        <div className="w-full h-2 bg-slate-300 rounded">
-                            <div
-                                style={{
-                                    width: step + '%'
-                                }}
-                                className="bg-amber-500 h-full rounded-lg"
-                            ></div>
-                        </div>
-                    </div>
+                    )}
                     <p className="mt-4 font-bold">Status del pedido</p>
                     {buy.delivery[0].delivered ? (
                         <p className=" font-semibold text-green-500">Entregado</p>
                     ) : buy.delivery[0].onTheWay ? (
-                        <p className=" font-semibold text-green-500">En camino</p>
+                        <p className=" font-semibold text-amber-500">En camino</p>
                     ) : (
-                        <p className=" font-semibold text-green-500">Recibido</p>
+                        <p className=" font-semibold text-red-500">Recibido</p>
                     )}
-
+                    
                     <div className="mt-2 flex flex-col gap-1">
                         <p className="text-neutral-700 font-bold text-lg">Direccion de entrega</p>
                         <p className=" font-semibold">Direccion: <span className=" font-normal">{buy.user.address}</span></p>
@@ -70,7 +71,7 @@ const UserBuy = ({buy, steps = false}) => {
                         <p className=" font-semibold">C.P. <span className=" font-normal">{buy.user.postalCode}</span></p>
                     </div>
                 </div>
-            )}
+            
         </div>
     )
 }

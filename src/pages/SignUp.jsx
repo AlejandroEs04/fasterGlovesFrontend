@@ -11,7 +11,11 @@ const SignUp = () => {
   const [number, setNumber] = useState("");
   const [password, setPassword] = useState("");
 
-  const { handleCreateAccount, alertas, load } = useShop();
+  const { handleCreateAccount, alertas, load, setAlertas } = useShop();
+
+  useEffect(() => {
+    setAlertas(null)
+  }, [])
 
   const comprobarInfo = useCallback(() => {
     return email === '' || password === '' || password.length <= 9 || name === '' || lastName === '' || number === ''

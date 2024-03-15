@@ -1,4 +1,5 @@
 import useAuth from "../hooks/useAuth";
+import { Link } from "react-router-dom";
 import PorfileInfo from "../components/PorfileInfo";
 
 const Porfile = () => {
@@ -30,8 +31,8 @@ const Porfile = () => {
 
         <div className="flex flex-col items-center">
           <h2 className="font-medium text-2xl text-neutral-600 text-center uppercase">Acerca de</h2>
-          <div className="flex justify-center my-5 w-full px-2 md:w-2/3 xl:w-1/2 flex-wrap">
-            <div className="flex flex-col items-center gap-2 p-5 border rounded shadow bg-white min-w-56">
+          <Link to={'/support'} className="flex justify-center my-5 w-full px-2 md:w-2/3 xl:w-1/2 flex-wrap hover:shadow-xl bg-white min-w-56 shadow transition-shadow rounded">
+            <div className="flex flex-col items-center gap-2 p-5">
               <div className="flex justify-start items-center gap-2">
                 <div>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7">
@@ -43,7 +44,7 @@ const Porfile = () => {
 
               <p>Contacta a nuestro servicio al cliente en caso de una inconeviencia</p>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
     </div>

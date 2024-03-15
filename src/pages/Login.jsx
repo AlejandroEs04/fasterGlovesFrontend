@@ -8,8 +8,12 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const { handleLogin, alertas } = useShop();
+    const { handleLogin, alertas, setAlertas } = useShop();
     const { setAuth } = useAuth();
+
+    useEffect(() => {
+        setAlertas(null)
+    }, [])
 
     const navigate = useNavigate();
 

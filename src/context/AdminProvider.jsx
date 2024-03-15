@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify"; 
 
@@ -45,8 +46,13 @@ const AdminProvider = ({children}) => {
 
     // Buy's variables
     const [buys, setBuys] = useState([]);
+    const [modal, setModal] = useState(false)
     const [productModal, setProductModal] = useState({});
     const [typeModal, setTypeModal] = useState({})
+
+    const [deleteId, setDeleteId] = useState(0);
+
+    const navigate = useNavigate();
     
 
     useEffect(() => {
@@ -75,6 +81,10 @@ const AdminProvider = ({children}) => {
                 toast.success(data.msg, {
                     position: toast.POSITION.BOTTOM_RIGHT
                 })
+
+                setTimeout(() => {
+                    navigate(0)
+                }, 2000);
             } catch (error) {
                 
             }
@@ -104,11 +114,15 @@ const AdminProvider = ({children}) => {
         }
 
         try {
-            const { data } = await axios(`${import.meta.env.VITE_API_URL}/api/products/${id}/delete`, config)
+            const { data } = await axios(`${import.meta.env.VITE_API_URL}/api/products/${deleteId}/delete`, config)
 
             toast.success(data.msg, {
                 position: toast.POSITION.BOTTOM_RIGHT
             })
+
+            setDeleteId(0)
+
+            navigate(0)
         } catch (error) {
             console.log(error)
         }
@@ -151,7 +165,7 @@ const AdminProvider = ({children}) => {
         }
 
         try {
-            const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/api/buy/update/${buy.ID}`, {
+            const {data} = await axios.put(`${import.meta.env.VITE_API_URL}/api/buy/admin/${buy.ID}`, {
                 onTheWay: true
             }, config)
 
@@ -180,7 +194,7 @@ const AdminProvider = ({children}) => {
         }
 
         try {
-            const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/api/buy/update/${buy.ID}`, {
+            const {data} = await axios.put(`${import.meta.env.VITE_API_URL}/api/buy/admin/${buy.ID}`, {
                 delivered: true
             }, config)
 
@@ -243,6 +257,7 @@ const AdminProvider = ({children}) => {
                 Authorization: `Bearer ${token}`
             }
         }
+
         try {
             const { data } = await axios.delete(`${import.meta.env.VITE_API_URL}/api/types/${id}`, config)
 
@@ -301,7 +316,30 @@ const AdminProvider = ({children}) => {
         })
     }
 
-    
+    const handleDeleteBuy = async() => {
+        const token = localStorage.getItem('token');
+        
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        try {
+            const { data } = await axios.delete(`${import.meta.env.VITE_API_URL}/api/buy/admin/${deleteId}`, config);
+
+            toast.success(data.msg, {
+                position: toast.POSITION.BOTTOM_RIGHT
+            })
+
+            setDeleteId(0);
+
+            navigate(0);
+        } catch (error) {
+            
+        }
+    }
 
     return (
         <AdminContext.Provider
@@ -337,6 +375,7 @@ const AdminProvider = ({children}) => {
                 handleSaveProduct,
                 handleGetAllBuy,
                 buys,
+                setBuys,
                 handleOnTheWay,
                 handleDelivered,
                 handleFillModal, 
@@ -344,7 +383,11 @@ const AdminProvider = ({children}) => {
                 setProductModal, 
                 handleFillModel, 
                 typeModal, 
-                handleDeleteModel
+                handleDeleteModel, 
+                modal, 
+                setModal, 
+                setDeleteId, 
+                handleDeleteBuy
             }}
         >
             {children}
